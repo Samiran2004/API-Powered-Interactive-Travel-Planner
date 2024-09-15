@@ -32,6 +32,7 @@ module.exports = updateProfile = async (req, res) => {
         if (country) {
             checkUser.country = country;
         }
+        //Save the updated data...
         await checkUser.save();
         res.status(201).send({
             status: 'Success',
