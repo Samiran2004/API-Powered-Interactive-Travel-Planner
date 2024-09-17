@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const generateRandomUserName = require('../utils/generateRandomUserName');
+const bcryptjs = require('bcryptjs');
 
 module.exports = updateProfile = async (req, res) => {
     try {
@@ -11,8 +12,8 @@ module.exports = updateProfile = async (req, res) => {
                 message: "User not found."
             });
         }
-        const { fullname, gender, preference, country } = req.body;
-        if (!fullname && !gender && !preference && !country) {
+        const { fullname, gender, preference, country, password } = req.body;
+        if (!fullname && !gender && !preference && !country && !password) {
             return res.status(400).send({
                 status: 'Failed',
                 message: "Please provide at least one field to update."
@@ -38,6 +39,11 @@ module.exports = updateProfile = async (req, res) => {
         }
         if (country) {
             checkUser.country = country;
+        }
+        if (password) {
+            const salt = await bcryptjs.genSalt(10)
+            const newHashedPassword = await bcryptjs.hash(password, salt);
+            checkUser.password = newHashedPassword;
         }
         //Save the updated data...
         await checkUser.save();
