@@ -42,7 +42,8 @@ module.exports = authenticateToken = async (req, res, next) => {
                                 email: userData.email,
                                 username: userData.username,
                                 gender: userData.gender,
-                                _id: userData._id
+                                _id: userData._id,
+                                profilepicture: userData.profilepicture
                             };
 
                             const newAccessToken = jwt.sign(newUserPayload, process.env.JWT_ACCESS_SECRET, {
