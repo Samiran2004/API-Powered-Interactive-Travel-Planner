@@ -1,7 +1,7 @@
-const cloudinary = require('../service/cloudinaryService');
-const User = require('../models/userModel');
-const sendMail = require('../service/mailService');
-const { deleteUserEmailData } = require('../utils/emailTemplate');
+const cloudinary = require('../../service/cloudinaryService');
+const User = require('../../models/userModel');
+const sendMail = require('../../service/mailService');
+const { deleteUserEmailData } = require('../../utils/emailTemplate');
 
 module.exports = async function userDelete(req, res) {
     try {

@@ -1,5 +1,5 @@
 const express = require('express');
-const create_new_user = require('../controller/registerController');
+const create_new_user = require('../controller/usercontroller/registerController');
 const upload = require('../middlewares/multer');
 const authTokenMiddleware = require('../middlewares/authTokenMiddleware');
 const route = express.Router();
@@ -79,22 +79,22 @@ route.post('/register', upload.single("profileimage"), create_new_user);
 
 //Login a User...
 //Path: /api/v1/user/login
-route.post('/login', require('../controller/loginController'));
+route.post('/login', require('../controller/usercontroller/loginController'));
 
 //Get user profile detials...
 //Path: /api/v1/user/profile
-route.get('/profile', authTokenMiddleware, require('../controller/userProfileController'));
+route.get('/profile', authTokenMiddleware, require('../controller/usercontroller/userProfileController'));
 
 //Delete user...
 //Path: /api/v1/user/delete
-route.delete('/delete', authTokenMiddleware, require('../controller/userProfileDeleteController'));
+route.delete('/delete', authTokenMiddleware, require('../controller/usercontroller/userProfileDeleteController'));
 
 //Update user...
 //Path: /api/v1/user/update
-route.patch('/update', authTokenMiddleware, upload.single("profileimage"), require('../controller/updateProfileController'));
+route.patch('/update', authTokenMiddleware, upload.single("profileimage"), require('../controller/usercontroller/updateProfileController'));
 
 //Update profile picture...
-//Path: /api/v1/update/profilepicture
-route.patch('/update/profilepicture', authTokenMiddleware, upload.single("profileimage"), require('../controller/updateProfilePictureController'));
+//Path: /api/v1/user/update/profilepicture
+route.patch('/update/profilepicture', authTokenMiddleware, upload.single("profileimage"), require('../controller/usercontroller/updateProfilePictureController'));
 
 module.exports = route;

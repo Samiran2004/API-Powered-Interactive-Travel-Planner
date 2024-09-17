@@ -1,5 +1,5 @@
-const User = require('../models/userModel');
-const generateRandomUserName = require('../utils/generateRandomUserName');
+const User = require('../../models/userModel');
+const generateRandomUserName = require('../../utils/generateRandomUserName');
 const bcryptjs = require('bcryptjs');
 
 module.exports = updateProfile = async (req, res) => {

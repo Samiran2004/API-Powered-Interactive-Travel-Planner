@@ -1,6 +1,6 @@
-const userDataValidation = require('../utils/joiLoginValidation');
+const userDataValidation = require('../../utils/joiLoginValidation');
 const jwt = require('jsonwebtoken');
-const User = require('../models/userModel');
+const User = require('../../models/userModel');
 const bcryptjs = require('bcryptjs');
 
 module.exports = async function loginuser(req, res) {

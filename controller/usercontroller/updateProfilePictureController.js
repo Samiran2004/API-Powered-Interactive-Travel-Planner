@@ -1,5 +1,5 @@
-const User = require('../models/userModel');
-const cloudinary = require('../service/cloudinaryService');
+const User = require('../../models/userModel');
+const cloudinary = require('../../service/cloudinaryService');
 const fs = require('fs');
 
 const updateProfilePicture = async (req, res) => {
