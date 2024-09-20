@@ -1,0 +1,2 @@
+1. Update User model => User travel history
+2. Work on recomendation model

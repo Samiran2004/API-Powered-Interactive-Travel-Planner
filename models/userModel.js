@@ -51,7 +51,13 @@ const userSchema = new mongoose.Schema({
     },
     refreshtoken: {
         type: String
-    }
+    },
+    recommendationhistory:[
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Recommendations'
+        }
+    ]
 })
 
 const User = mongoose.model('User', userSchema);

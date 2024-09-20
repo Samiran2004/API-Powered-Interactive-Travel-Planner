@@ -9,6 +9,7 @@ const swaggerOptions = require('./utils/swaggerOptions');
 const figlet = require('figlet');
 const mongoose = require('mongoose');
 const userroute = require('./routes/userRoutes');
+const recommendationroute = require('./routes/recommendationRoutes');
 const sanitizeInput = require('./middlewares/sanitization');
 const cookieParser = require('cookie-parser');
 
@@ -94,6 +95,8 @@ app.get('/isWork', (req, res) => {
 
 //User route...
 app.use('/api/v1/user', userroute);
+//Recomendaton route...
+app.use('/api/v1/recommendation', recommendationroute);
 
 // Connection with server...
 app.listen(process.env.PORT, (err) =>
