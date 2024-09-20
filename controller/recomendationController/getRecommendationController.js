@@ -1,3 +1,6 @@
+const User = require('../../models/userModel');
+const Recommendations = require('../../models/recommendationModel');
+
 const getRecommendations = async(req,res)=>{
     try {
         
