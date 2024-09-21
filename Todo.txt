@@ -1,2 +1,6 @@
-1. Update User model => User travel history
-2. Work on recomendation model
+1. Create a route 
+2. Configure ML model
+3. fetch data from user and userdatabase and previous recomendation
+4. generate a perfect result using ML model
+5. Save the recomendation detials in database
+6. send response

@@ -1,4 +1,4 @@
-const userDataValidation = require('../../utils/joiLoginValidation');
+const userDataValidation = require('../../utils/Joi Utils/joiLoginValidation');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/userModel');
 const bcryptjs = require('bcryptjs');

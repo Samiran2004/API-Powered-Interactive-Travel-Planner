@@ -13,7 +13,7 @@ const recommendationSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    user:{
+    user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     }

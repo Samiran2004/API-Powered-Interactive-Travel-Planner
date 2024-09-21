@@ -1,6 +1,6 @@
 const User = require('../../models/userModel');
 const bcrypt = require('bcryptjs');
-const userDataValidation = require('../../utils/JoiValidation');
+const userDataValidation = require('../../utils/Joi Utils/JoiValidation');
 const generateRandomUserName = require('../../utils/generateRandomUserName');
 const cloudinary = require('../../service/cloudinaryService');
 const sendMail = require('../../service/mailService');
