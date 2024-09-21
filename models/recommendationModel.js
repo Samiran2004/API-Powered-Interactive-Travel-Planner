@@ -9,6 +9,14 @@ const recommendationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    budget:{
+        type: Number,
+        required: true
+    },
+    totalPerson:{
+        type: Number,
+        default: 1
+    },
     recommendationOn: {
         type: Date,
         default: Date.now

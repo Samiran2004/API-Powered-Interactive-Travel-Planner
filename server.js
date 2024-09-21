@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const userroute = require('./routes/userRoutes');
 const recommendationroute = require('./routes/recommendationRoutes');
 const sanitizeInput = require('./middlewares/sanitization');
+const redis = require('./redis/client');
 const cookieParser = require('cookie-parser');
 
 // Configure env variables...
@@ -26,6 +27,11 @@ mongoose.connect(process.env.DB_URI).then(
         figlet("D a t a b a s e  c o n n e c t i o n  e r r o r", (err, data) => err ? console.log("Figlet error") : console.log(data))
     }
 )
+
+//Redis connection...
+redis.on("connect",()=>{
+    console.log("Redis connected...");
+});
 
 // CORS...
 app.use(cors());
