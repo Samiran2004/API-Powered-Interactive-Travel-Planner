@@ -84,6 +84,7 @@ const generateRecommendations = async (req, res) => {
                 // Generate a prompt and fetch the recommendation using external AI service
                 const prompt = generatePrompt(data);
                 const getRecommendation = await generateRecommendation(prompt);
+                const result = getRecommendation.replace(/```json|```/g, "").trim();
 
                 // Create a new recommendation and save it to the database
                 const newRecommendation = new Recommendations({
@@ -91,7 +92,7 @@ const generateRecommendations = async (req, res) => {
                     budget: budget,
                     totalPerson: totalPeople,
                     day: day, // Include `day` when saving the recommendation
-                    details: getRecommendation,
+                    details: result,
                     user: req.user._id
                 });
 
@@ -102,12 +103,12 @@ const generateRecommendations = async (req, res) => {
                 await user.save();
 
                 // Save the new recommendation in Redis (set expiry to 24 hours)
-                redis.setex(redisKey, 86400, JSON.stringify(getRecommendation));
+                redis.setex(redisKey, 86400, JSON.stringify(result));
 
                 // Return the new recommendation
                 return res.status(200).send({
                     status: 'Success',
-                    data: getRecommendation
+                    data: getRecommendation.replace(/```json|```/g, "").trim()
                 });
             }
         });
