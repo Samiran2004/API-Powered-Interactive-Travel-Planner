@@ -50,6 +50,7 @@ module.exports = async (req, res) => {
                 // Save the new recommendation in Redis(For 5min)
                 redis.setex(redisKey, 300, JSON.stringify(result));
 
+                //Return the response
                 return res.status(200).json({
                     status: 'Success',
                     recommendations: result
