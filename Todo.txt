@@ -1,6 +1,29 @@
-1. Create a route 
-2. Configure ML model
-3. fetch data from user and userdatabase and previous recomendation
-4. generate a perfect result using ML model
-5. Save the recomendation detials in database
-6. send response
+Create a Planning route.
+
+POST /planner/create
+Purpose: Create a new travel plan.
+Description: Accepts user input (destination, travel dates, budget, number of travelers, etc.) and generates an initial travel plan.
+
+GET /planner/
+Purpose: Retrieve details of a specific travel plan.
+Description: Returns a detailed breakdown of the plan, including flights, accommodations, activities, and other logistics.
+
+PUT /planner/update
+Purpose: Update an existing travel plan.
+Description: Modify details of a travel plan, such as changing dates, destination, or adding new activities.
+
+DELETE /planner/delete
+Purpose: Delete a travel plan.
+Description: Removes the specified travel plan from the system.
+
+POST /planner/recommendations
+Purpose: Get recommendations based on a travel plan.
+Description: Based on user preferences (e.g., destination, activities, accommodation), this endpoint returns recommended flights, accommodations, and activities.
+
+GET /planner/popular-destinations
+Purpose: Fetch trending or popular travel destinations.
+Description: Returns a list of popular destinations, including flight, accommodation, and activity suggestions.
+
+GET /planner/suggest-itinerary/
+Purpose: Suggest a daily itinerary based on the plan.
+Description: Returns a day-by-day breakdown of activities, accommodations, and logistics.

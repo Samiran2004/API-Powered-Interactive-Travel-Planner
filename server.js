@@ -10,6 +10,7 @@ const figlet = require('figlet');
 const mongoose = require('mongoose');
 const userroute = require('./routes/userRoutes');
 const recommendationroute = require('./routes/recommendationRoutes');
+const planningRoute = require('./routes/planningRoute');
 const sanitizeInput = require('./middlewares/sanitization');
 const redis = require('./redis/client');
 const cookieParser = require('cookie-parser');
@@ -103,6 +104,8 @@ app.get('/isWork', (req, res) => {
 app.use('/api/v1/user', userroute);
 //Recomendaton route...
 app.use('/api/v1/recommendation', recommendationroute);
+//Planning route...
+app.use('/api/v1/planning', planningRoute);
 
 // Connection with server...
 app.listen(process.env.PORT, (err) =>

@@ -8,7 +8,6 @@ module.exports = async (req, res) => {
 
         // Generate a prompt and fetch the popular destinations using external AI service
         const prompt = generatePromptForPopularDest(country);
-        console.log(prompt)
         const generatePopularDest = await generateRecommendation(prompt);
         const result = generatePopularDest.replace(/```json|```/g, "").trim();
         return res.status(200).send({
