@@ -10,6 +10,10 @@ route.post('/generate-recommendations', authTokenMiddleware, require('../control
 //Path: /api/v1/recommendations/recommendation-history
 route.get('/recommendation-history', authTokenMiddleware, require('../controller/recomendationController/getUserRecHistory'));
 
+// Discover trending travel destinations
+//Path: /api/v1/recommendations/popular-destinations
+route.get('/popular-destinations', authTokenMiddleware, require('../controller/recomendationController/getPopularDestController'));
+
 //Generate all possible recommendations using budget
 //Path: /api/v1/recommendation/:budget
 route.get('/:budget', authTokenMiddleware, require('../controller/recomendationController/getRecBudgetController'));
