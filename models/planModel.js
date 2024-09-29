@@ -44,20 +44,20 @@ const planSchema = new mongoose.Schema({
     },
     flights: [
         {
-            flight_number: {
+            departure_city: {
                 type: String,
                 required: false
             },
-            departure: {
-                type: Date,
+            flight_duration: {
+                type: String,
                 required: false
             },
-            arrival: {
-                type: Date,
+            estimated_cost: {
+                type: String,
                 required: false
             },
-            price: {
-                type: Number,
+            destination: {
+                type: String,
                 required: false
             }
         }
