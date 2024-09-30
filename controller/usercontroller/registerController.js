@@ -1,5 +1,6 @@
 const User = require('../../models/userModel');
 const bcrypt = require('bcryptjs');
+const cc = require('currency-codes');
 const userDataValidation = require('../../utils/Joi Utils/JoiValidation');
 const generateRandomUserName = require('../../utils/generateRandomUserName');
 const cloudinary = require('../../service/cloudinaryService');
@@ -9,7 +10,7 @@ const { registerEmailData } = require('../../utils/emailTemplate');
 require('dotenv').config();
 
 module.exports = async function create_new_user(req, res) {
-    const { fullname, email, password, phonenumber, gender, preference, country } = req.body;
+    let { fullname, email, password, phonenumber, gender, preference, country } = req.body;
 
     try {
         // Check for required fields
@@ -61,6 +62,10 @@ module.exports = async function create_new_user(req, res) {
             });
         }
 
+        //Creaye Currency code
+        country = country.toLowerCase();
+        const cCode = cc.country(country);
+
         // Create the new user
         const newUser = new User({
             fullname: fullname,
@@ -71,7 +76,8 @@ module.exports = async function create_new_user(req, res) {
             gender: gender,
             preferences: preference,
             country: country,
-            profilepicture: uploadImageUrl.url
+            profilepicture: uploadImageUrl.url,
+            currency_code: cCode[0].code
         });
         await newUser.save();
 
@@ -98,7 +104,8 @@ module.exports = async function create_new_user(req, res) {
                     gender: newUser.gender,
                     preference: newUser.preferences,
                     country: newUser.country,
-                    profilepicture: newUser.profilepicture
+                    profilepicture: newUser.profilepicture,
+                    currency_code: currency_code
                 }
             });
         });

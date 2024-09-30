@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const planSchema = new mongoose.Schema({
-    userid: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
@@ -10,34 +10,17 @@ const planSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    startDate: {
-        type: Date,
-        required: true
-    },
-    endDate: {
-        type: Date,
-        required: true
-    },
     budget: {
-        type: Number,
-        required: true
+        type: String,
+        enum: ["budget", "mid-range", "luxury"],
+        default: "budget"
     },
-    travelers: {
-        type: Number,
-        required: true,
-        default: 1
-    },
-    preferences: {
-        accomodation_type: {
+    travel_dates: {
+        start_date: {
             type: String,
-            enum: ["hotel", "Airbnb", "hostel"],
             required: true
         },
-        activity_type: {
-            type: [String],
-            required: true
-        },
-        food_preference: {
+        end_date: {
             type: String,
             required: true
         }
@@ -45,70 +28,27 @@ const planSchema = new mongoose.Schema({
     flights: [
         {
             departure_city: {
-                type: String,
-                required: false
+                type: String
             },
             flight_duration: {
-                type: String,
-                required: false
+                type: String
             },
             estimated_cost: {
-                type: String,
-                required: false
-            },
-            destination: {
-                type: String,
-                required: false
+                type: String
             }
         }
     ],
     hotels: [
         {
             hotel_name: {
-                type: String,
-                required: false
+                type: String
             },
-            price_per_night: {
-                type: Number,
-                required: false
-            },
-            nights: {
-                type: Number,
-                required: false
+            estimated_cost: {
+                type: String
             }
         }
-    ],
-    activities: [
-        {
-            activity_name: {
-                type: String,
-                required: false
-            },
-            description: {
-                type: String,
-                required: false
-            },
-            price: {
-                type: Number,
-                required: false
-            }
-        }
-    ],
-    estimated_cose: {
-        type: Number,
-        required: false
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    }
+    ]
+});
 
-})
-
-const Paln = mongoose.model("Plan", planSchema);
-
-module.exports = Paln;
+const Plan = mongoose.model('Plan', planSchema);
+module.exports = Plan;

@@ -1,52 +1,49 @@
 const User = require('../../models/userModel');
 const Plan = require('../../models/planModel');
-const axios = require('axios');
-const getImageUrl = require('../../service/unsplashService');
-const createFlightPlanPrompt = require('../../utils/Gemini Utils/flightPlanPrompt');
+const generateFlightPrompt = require('../../utils/Gemini Utils/flightPlanPrompt');
 const generateRecommendation = require('../../utils/Gemini Utils/generateRecommendation');
 
 module.exports = async (req, res) => {
     try {
-        const {
-            destination,
-            start_date,
-            end_date,
-            budget,
-            travelers,
-            accommodation_type } = req.body;
-        //Check all fields are exist in request or not...
-        if (!destination || !start_date || !end_date || !budget || !travelers || !accommodation_type) {
+        //Fetch all data from req.body
+        let { destination, dispatch_city, travel_dates, budget, total_people } = req.body;
+
+        //Check all required fields are present or not
+        if (!destination || !dispatch_city || !travel_dates || !budget || !total_people) {
             return res.status(400).send({
                 status: 'Failed',
                 message: "All fields are required."
             });
         }
 
-        //Fetch user...
-        const user = req.user;
-
-        //Create an image url using destination...
-        const imageUrl = await getImageUrl(destination);
-
-        //Create a flight plan...
-        const dataforflightprompt = {
-            country: user.country,
-            destination: destination
+        //Generate Flight Data...
+        //Generate prompt for flight
+        const flightPayload = {
+            start_destination: dispatch_city,
+            final_destination: destination,
+            start_date: travel_dates.start_date,
+            return_date: travel_dates.end_date,
+            total_people: total_people,
+            budget: budget,
+            currency_code: req.user.currency_code
         }
-        const flightPrompt = createFlightPlanPrompt(dataforflightprompt);
-        const getRecommendation = await generateRecommendation(flightPrompt);
-        const flightResponse = getRecommendation.replace(/```json|```/g, "").trim();
+        let flightPrompt = generateFlightPrompt(flightPayload);
+        let generateFlightData = await generateRecommendation(flightPrompt);
+        const flightData = JSON.parse(generateFlightData.replace(/```json|```/g, "").trim());
 
-        return res.status(201).send({
+        //Generate Hotels data...
+        //Generate prompt for hotels
+        
+        res.status(200).send({
             status: 'Success',
-            message: "Plan Created",
-            data: flightResponse
-        });
+            data: flightData
+        })
+
+
     } catch (error) {
-        console.error("Error: ", error.message);
         res.status(500).send({
             status: 'Failed',
             message: "Internal Server Error."
-        });
+        })
     }
 }

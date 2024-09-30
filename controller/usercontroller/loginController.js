@@ -35,6 +35,7 @@ module.exports = async function loginuser(req, res) {
                             username: checkUser.username,
                             gender: checkUser.gender,
                             country: checkUser.country,
+                            currency_code: checkUser.currency_code,
                             _id: checkUser._id
                         }
                         //Access token...

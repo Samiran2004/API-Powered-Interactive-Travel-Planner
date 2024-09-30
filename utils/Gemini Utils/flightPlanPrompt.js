@@ -1,33 +1,41 @@
-module.exports = function createFlightPlanPrompt(data) {
+module.exports = function generateFlightPrompt(data){
     return `
-        "Generate a flight plan for traveling from major cities in ${data.country} to ${data.destination}. The plan should include:
+        Based on the following details, generate a structured flight recommendation in pure JSON format:
 
-        1. Departure cities in ${data.country}.
-        2. Flight duration from each city to ${data.destination}.
-        3. Estimated flight cost for each city to ${data.destination}.
+- Starting Destination: ${data. start_destination}
+- Final Destination: ${data.final_destination}
+- Travel Date: ${data.start_date}
+- Return Date: ${data.return_date}
+- Total People: ${data.total_people}
+- Class: Economy
+- estimated_cost: rough estimated cost in ${data.currency_code}
+- Airline Preference: Any
 
-        Present the information as a JSON array only without any additional notes or explanations."
+Provide the recommendations in **JSON format only** with the following structure:
 
-        Example response:
+[
+  {
+    "airline": "Airline Name",
+    "flight_number": "Flight Number",
+    "departure_time": "2024-12-15T08:00:00",
+    "arrival_time": "2024-12-15T20:00:00",
+    "price": "1000 USD",
+    "class": "Economy",
+    "duration": "7h 30m"
+  },
+  {
+    "airline": "Airline Name",
+    "flight_number": "Flight Number",
+    "departure_time": "2024-12-22T10:00:00",
+    "arrival_time": "2024-12-22T14:00:00",
+    "price": "500 USD",
+    "class": "Economy",
+    "duration": "7h 00m"
+  }
+]
 
-        [
-            {
-                "departure_city": "Mumbai",
-                "flight_duration": "9 hours",
-                "estimated_cost": "₹40,000 - ₹80,000"
-            },
-            {
-                "departure_city": "Delhi",
-                "flight_duration": "9 hours",
-                "estimated_cost": "₹45,000 - ₹85,000"
-            },
-            {
-                "departure_city": "Bangalore",
-                "flight_duration": "10 hours",
-                "estimated_cost": "₹42,000 - ₹78,000"
-            }
-        ]
+Do **not** include markdown, explanations, or any additional text—just the JSON object.
+Provide all possible flight options based on this information.
 
-        Provide all possible results strictly in JSON format, without any extra information, notes, or recommendations.
-    `;
+    `
 }

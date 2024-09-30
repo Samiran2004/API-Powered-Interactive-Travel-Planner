@@ -16,6 +16,7 @@
     "cloudinary": "^2.4.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "currency-codes": "^2.1.0",
     "dotenv": "^16.4.5",
     "escape-html": "^1.0.3",
     "express": "^4.19.2",

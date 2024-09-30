@@ -52,7 +52,10 @@ const userSchema = new mongoose.Schema({
     refreshtoken: {
         type: String
     },
-    recommendationhistory:[
+    currency_code: {
+        type: String
+    },
+    recommendationhistory: [
         {
             type: mongoose.Schema.ObjectId,
             ref: 'Recommendations'
