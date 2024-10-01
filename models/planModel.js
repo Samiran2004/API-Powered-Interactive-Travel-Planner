@@ -10,10 +10,18 @@ const planSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    dispatch_city:{
+        type: String,
+        required: true
+    },
     budget: {
         type: String,
         enum: ["budget", "mid-range", "luxury"],
         default: "budget"
+    },
+    total_people:{
+        type: Number,
+        required: true
     },
     travel_dates: {
         start_date: {
@@ -27,13 +35,25 @@ const planSchema = new mongoose.Schema({
     },
     flights: [
         {
-            departure_city: {
+            airline: {
                 type: String
             },
-            flight_duration: {
+            flight_number: {
                 type: String
             },
-            estimated_cost: {
+            departure_time: {
+                type: String
+            },
+            arrival_time: {
+                type: String
+            },
+            price: {
+                type: String
+            },
+            class: {
+                type: String
+            },
+            duration: {
                 type: String
             }
         }
@@ -44,6 +64,23 @@ const planSchema = new mongoose.Schema({
                 type: String
             },
             estimated_cost: {
+                type: String
+            },
+            price_per_night: {
+                type: String
+            },
+            address: {
+                type: String
+            },
+            rating: {
+                type: String
+            },
+            amenities: [
+                {
+                    type: String
+                }
+            ],
+            distance_to_city_center: {
                 type: String
             }
         }

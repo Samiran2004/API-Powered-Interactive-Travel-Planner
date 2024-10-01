@@ -57,8 +57,14 @@ const userSchema = new mongoose.Schema({
     },
     recommendationhistory: [
         {
-            type: mongoose.Schema.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Recommendations'
+        }
+    ],
+    plans: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Plan'
         }
     ]
 })
